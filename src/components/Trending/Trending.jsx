@@ -2,6 +2,7 @@ import { Box, Flex, Heading, Tab, TabList, TabPanel, TabPanels, Tabs } from '@ch
 import React, { useContext, useEffect } from 'react'
 import { trendingContext } from '../../Context/TrendingContext'
 import Slider from '../Slider';
+import ToggleSwitch from '../TabsSwitch/ToggleSwitch';
 // import TabSwitch from '../TabsSwitch/TabSwitch';
 
 const Trending = () => {
@@ -18,6 +19,7 @@ const Trending = () => {
                 <Flex justify='space-between'>
                     <Heading ml='3px' mb={4} color='white'>Trending</Heading>
                     {/* <TabSwitch tabs={tabs}/> */}
+                    <ToggleSwitch/>
                 </Flex>
                 <Box>
                     <Slider type={trendingMovies} />
