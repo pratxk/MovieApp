@@ -2,6 +2,7 @@ import { Box, Flex, Heading, Tab, TabList, TabPanel, TabPanels, Tabs } from '@ch
 import React, { useContext, useEffect } from 'react'
 import Slider from '../Slider';
 import { popularContext } from '../../Context/PopularContext/PopularContext';
+import ToggleSwitch from '../TabsSwitch/ToggleSwitch';
 // import TabSwitch from '../TabsSwitch/TabSwitch';
 
 const Popular = () => {
@@ -15,9 +16,11 @@ const Popular = () => {
 
 
             <Box>
-                <Flex justify='space-between'>
-                    <Heading ml='3px' mb={4} color='white'>What's Popular </Heading>
-                    {/* <TabSwitch tabs={tabs}/> */}
+                <Flex justify='space-between'  mb={6} alignItems='center' textAlign='center'>
+                <Box>
+                        <Heading fontWeight={500} fontSize='2xl' color='white'>What's Popular</Heading>
+                    </Box>
+                    <ToggleSwitch />
                 </Flex>
                 <Box>
                     <Slider type={popularMovies} />

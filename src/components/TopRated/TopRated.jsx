@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import { Box, Flex, Heading } from '@chakra-ui/react';
 import Slider from '../Slider';
 import { topRatedContext } from '../../Context/TopRatedContext/TopRatedContext';
+import ToggleSwitch from '../TabsSwitch/ToggleSwitch';
 
 const TopRated = () => {
     const { topRatedMovies, error, getTopRatedMovies } = useContext(topRatedContext);
@@ -12,8 +13,11 @@ const TopRated = () => {
     return (
         <>
             <Box>
-                <Flex justify='space-between'>
-                    <Heading ml='3px' mb={4} color='white'>Top Rated</Heading>
+                <Flex  mb={6} justifyContent='space-between'  alignItems='center' textAlign='center'>
+                    <Box>
+                        <Heading fontWeight={500} fontSize='2xl' color='white'>Top Rated</Heading>
+                    </Box>
+                    <ToggleSwitch/>
                 </Flex>
                 <Box>
                     <Slider type={topRatedMovies} />

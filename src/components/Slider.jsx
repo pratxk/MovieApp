@@ -73,8 +73,8 @@ const Slider = ({ type }) => {
                                     alt={i.name}
                                     boxSize={{ base: "100px" }}
                                     borderRadius='3%'
-                                    w="110%"
-                                    h='350px'
+                                    w="100%"
+                                    h='300px'
                                 />
                                 <Flex pos='absolute' bottom='15px' bg='transparent' right='20px' gap='5px'>
                                     {i.genre_ids.slice(0, 2).map((ele) => {
@@ -111,10 +111,10 @@ const Slider = ({ type }) => {
             </Swiper>
             <Button
                 position="absolute"
-                left="10px"
-                top="45%"
+                left="-2"
+                top="35%"
                 transform="translateY(-50%)"
-                onClick={handleNext}
+                onClick={handlePrev}
                 zIndex={1}
                 border="none"
                 bg="transparent"
@@ -127,8 +127,8 @@ const Slider = ({ type }) => {
 
             <Button
                 position="absolute"
-                right="10px"
-                top="45%"
+                right="-2"
+                top="35%"
                 transform="translateY(-50%)"
                 onClick={handleNext}
                 zIndex={1}

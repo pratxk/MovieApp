@@ -14,7 +14,7 @@ const Home = () => {
                 <Center m='auto' color='white' p='0' display='flex' flexDir='column' h='600px'>
                     <Box display='flex' flexDir='column' justifyContent='center' alignItems='center'>
                         <Box>
-                            <Heading fontSize='6em'>
+                            <Heading fontSize='6em' fontWeight='650'>
                                 Welcome.
                             </Heading>
                         </Box>
@@ -25,11 +25,13 @@ const Home = () => {
                         </Box>
                     </Box>
                     <Box display='flex' mt={6} borderRadius='60px 0px 0px 60px' w='45em' >
-                        <Input borderRadius='60px 0px 0px 60px' bg='white' h='67px' color='black' placeholder='Enter Your movie name' />
+                        <Input borderRadius='60px 0px 0px 60px' bg='white' h='60px' color='black' placeholder='Enter Your movie name' />
                         <Button
                             color='white'
-                            h='67px'
+                            h='60px'
+                            w='10em'
                             borderRadius='0px 60px 60px 0px'
+                            _hover='none'
                             bg={`linear-gradient(98.37deg, #f89e00 0.99%, #da2f68 100%)`}>
                             Search
                         </Button>

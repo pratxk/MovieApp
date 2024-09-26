@@ -6,20 +6,25 @@ import ToggleSwitch from '../TabsSwitch/ToggleSwitch';
 // import TabSwitch from '../TabsSwitch/TabSwitch';
 
 const Trending = () => {
-    const { trendingMovies, getTrendingMovies } = useContext(trendingContext);
+    const { trendingMovies, getTrendingMovies, state ,trendingWeeklyMovies, getTrendingWeeklyMovies } = useContext(trendingContext);
+
     useEffect(() => {
         getTrendingMovies();
-        console.log(trendingMovies)
-    }, [])
+        getTrendingWeeklyMovies();
+        console.log(trendingMovies,trendingWeeklyMovies)
+    }, []);
+
     return (
         <>
 
 
             <Box>
-                <Flex justify='space-between'>
-                    <Heading ml='3px' mb={4} color='white'>Trending</Heading>
+                <Flex justify='space-between' mb={6} alignItems='center' textAlign='center'>
+                    <Box>
+                        <Heading fontWeight={500} fontSize='2xl' color='white'>Trending</Heading>
+                    </Box>
                     {/* <TabSwitch tabs={tabs}/> */}
-                    <ToggleSwitch/>
+                    <ToggleSwitch val1={'Day'} val2='Weekly' />
                 </Flex>
                 <Box>
                     <Slider type={trendingMovies} />
