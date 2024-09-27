@@ -1,10 +1,10 @@
 import React, { useContext, useEffect } from 'react'
 import { infiniteContext } from '../../Context/InfiniteScrollContext/InfiniteContext';
-import MovieCard from './MovieCard';
 import { Box, Flex, Grid, Heading, Center, Spinner } from '@chakra-ui/react';
+import TvShowCard from './TvShowCard';
 
-const Movie = () => {
-    const { infiniteMovies, getInfiniteMovies, page, setPage, setInfiniteMovies, loading } = useContext(infiniteContext);
+const TvShow = () => {
+    const { infiniteTvShows, getInfiniteTvShows, page, setPage, setInfiniteTvShows, loading } = useContext(infiniteContext);
 
     const increasePageNumber = () => {
         if(window.scrollY + window.innerHeight >=  document.body.offsetHeight - 1000 ){
@@ -13,13 +13,13 @@ const Movie = () => {
     } 
     
     useEffect(()=>{
-        async function fetchMovies(page) {
-            const movies =await getInfiniteMovies(page);
-            setInfiniteMovies((prev)=>{
-                return [...prev,  ...movies]
+        async function fetchTvShows(page) {
+            const tvshows =await getInfiniteTvShows(page);
+            setInfiniteTvShows((prev)=>{
+                return [...prev,  ...tvshows]
             });
         }
-        fetchMovies(page)
+        fetchTvShows(page)
     },[page])
     
     useEffect(()=>{
@@ -27,9 +27,9 @@ const Movie = () => {
         return () => {
             window.removeEventListener('scroll',increasePageNumber);
         }
-    },[ infiniteMovies ])
+    },[ infiniteTvShows ])
 
-    console.log("infinateMovies in comp",infiniteMovies);
+    console.log("infinateMovies in comp",infiniteTvShows);
 
     if (loading) {
         return (
@@ -43,14 +43,14 @@ const Movie = () => {
         <Box mt={4}>
             <Flex justify='space-between' mb={6} alignItems='center' textAlign='center'>
                 <Box>
-                    <Heading fontWeight={500} fontSize='2xl' color='white'>Explore Movies</Heading>
+                    <Heading fontWeight={500} fontSize='2xl' color='white'>Explore TV Shows</Heading>
                 </Box>
                 {/* <TabSwitch tabs={tabs}/> */}
             </Flex>
             <Box>
                 <Grid templateColumns='repeat(5,1fr)' gap={5}>
-                    {infiniteMovies && infiniteMovies.map((movie, index) => (
-                        <MovieCard key={index} movie={movie} />
+                    {infiniteTvShows && infiniteTvShows.map((tvshow, index) => (
+                        <TvShowCard key={index} tvshow={tvshow} />
                     ))}
                 </Grid>
             </Box>
@@ -58,4 +58,4 @@ const Movie = () => {
     );
 }
 
-export default Movie
+export default TvShow

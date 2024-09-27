@@ -1,32 +1,31 @@
-import { Badge, Box, Flex, Image, Square, Text, VStack } from '@chakra-ui/react'
+import { Badge, Box, Flex, Image, Square, Text, VStack } from '@chakra-ui/react';
 import React from 'react'
-import { Link } from 'react-router-dom'
-import CircleProgress from '../../components/Progress_Bars/CircularProgress'
+import CircleProgress from '../Progress_Bars/CircularProgress';
+import { Link } from 'react-router-dom';
 import { genres } from '../../components/Trending/genres';
-
-function MovieCard({movie}) {
-    const baseUrl = 'https://image.tmdb.org/t/p/original/';
+const SearchCard = ({ item }) => {
+    const baseUrl = 'https://image.tmdb.org/t/p/original';
     return (
         <>
             <Box>
                 <Link to={''}>
                     <Square m="auto" position='relative'>
                         <Image
-                            src={`${baseUrl + movie.poster_path}`}
-                            alt={movie.name}
+                            src={`${baseUrl}${item.poster_path || item.profile_path}`}
+                            alt={item.name}
                             boxSize={{ base: "100px" }}
                             borderRadius='3%'
                             w="100%"
                             h='300px'
                         />
                         <Flex pos='absolute' bottom='15px' bg='transparent' right='20px' gap='5px'>
-                            {movie.genre_ids.slice(0, 2).map((ele) => {
+                            {item.genre_ids?.slice(0, 2).map((ele) => {
                                 const genreName = genres[ele];
                                 return <Badge fontWeight='bold' fontSize={'10px'} key={ele} bg='hotpink' color='white'>{genreName}</Badge>;
                             })}
                         </Flex>
                         <Box pos='absolute' bottom='-5' left='0' borderRadius='100%'>
-                            <CircleProgress value={movie.vote_average} />
+                            <CircleProgress value={item.vote_average || 0} />
                         </Box>
                     </Square>
                 </Link>
@@ -38,7 +37,7 @@ function MovieCard({movie}) {
                         fontSize="16px"
                         color='white'
                     >
-                        {movie.original_title}
+                        {item.original_title !== undefined ? item.original_title : item.original_name}
                     </Text>
                     <Text
                         pb={5}
@@ -46,7 +45,7 @@ function MovieCard({movie}) {
                         fontSize="13px"
                         color='white'
                     >
-                        {movie.release_date}
+                        {item.release_date !== undefined ? item.release_date : item.first_air_date}
                     </Text>
                 </VStack>
             </Box>
@@ -54,4 +53,4 @@ function MovieCard({movie}) {
     )
 }
 
-export default MovieCard
+export default SearchCard

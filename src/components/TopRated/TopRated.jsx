@@ -1,30 +1,52 @@
 import React, { useContext, useEffect } from 'react'
-import { Box, Flex, Heading } from '@chakra-ui/react';
+import { Box, Flex, Heading, Spinner, Center } from '@chakra-ui/react';
 import Slider from '../Slider';
-import { topRatedContext } from '../../Context/TopRatedContext/TopRatedContext';
+import { topRatedContext, TopRatedContextProvider } from '../../Context/TopRatedContext/TopRatedContext';
 import ToggleSwitch from '../TabsSwitch/ToggleSwitch';
 
 const TopRated = () => {
-    const { topRatedMovies, error, getTopRatedMovies } = useContext(topRatedContext);
+    const { 
+        topRatedMovies, 
+        error, 
+        getTopRatedMovies, 
+        state, 
+        handleState, 
+        topRatedTvShows, 
+        getTopRatedTvShows,
+        isLoadingMovies,
+        isLoadingTvShows
+    } = useContext(topRatedContext);
+
     useEffect(() => {
         getTopRatedMovies();
-        console.log(topRatedMovies)
+        getTopRatedTvShows();
     }, [])
-    return (
-        <>
-            <Box>
-                <Flex  mb={6} justifyContent='space-between'  alignItems='center' textAlign='center'>
-                    <Box>
-                        <Heading fontWeight={500} fontSize='2xl' color='white'>Top Rated</Heading>
-                    </Box>
-                    <ToggleSwitch/>
-                </Flex>
-                <Box>
-                    <Slider type={topRatedMovies} />
-                </Box>
-            </Box>
 
-        </>
+    const isLoading = state ? isLoadingMovies : isLoadingTvShows;
+
+    if (isLoading) {
+        return (
+            <Center h="200px">
+                <Spinner size="xl" color="white" />
+            </Center>
+        );
+    }
+
+    return (
+        <Box mb={4}>
+            <Flex mb={6} justifyContent='space-between' alignItems='center' textAlign='center'>
+                <Box>
+                    <Heading fontWeight={500} fontSize='2xl' color='white'>Top Rated</Heading>
+                </Box>
+                <TopRatedContextProvider>
+                    <ToggleSwitch onClick={handleState} val1={'Movies'} val2={'TV Shows'}/>
+                </TopRatedContextProvider>
+            </Flex>
+            <Box>
+                <Slider type={state ? topRatedMovies : topRatedTvShows} />
+            </Box>
+        </Box>
     )
 }
+
 export default TopRated

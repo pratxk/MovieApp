@@ -1,13 +1,32 @@
-import { Box, Button, Center, Heading, Input } from '@chakra-ui/react'
-import React from 'react'
+import { Box, Button, Center, Heading, Input, Spinner } from '@chakra-ui/react'
+import React, { useContext } from 'react'
 import Trending from '../components/Trending/Trending'
 import { TrendingContextProvider } from '../Context/TrendingContext'
 import { PopularContextProvider } from '../Context/PopularContext/PopularContext'
 import Popular from '../components/Popular/Popular'
 import { TopRatedContextProvider } from '../Context/TopRatedContext/TopRatedContext'
 import TopRated from '../components/TopRated/TopRated'
+import SearchForm from '../components/Forms/SearchForm'
+import { searchContext } from '../Context/SearchContext/SearchContext'
+import SearchResults from '../components/Search_Components/SearchResults'
 
 const Home = () => {
+    const {searchState, loading,searchResults} = useContext(searchContext);
+    console.log("Home------",searchResults);
+    if(loading){
+        return (
+            <Center h="100vh">
+                <Spinner size="xl" color="white" />
+            </Center>
+        );
+    }
+    if(searchResults?.length>0){
+        return (
+            <Box px='12em' mt={5} mb={5}>
+                <SearchResults/>
+            </Box>
+        );
+    }
     return (
         <>
             <Box px='12em'>
@@ -24,17 +43,8 @@ const Home = () => {
                             </Heading>
                         </Box>
                     </Box>
-                    <Box display='flex' mt={6} borderRadius='60px 0px 0px 60px' w='45em' >
-                        <Input borderRadius='60px 0px 0px 60px' bg='white' h='60px' color='black' placeholder='Enter Your movie name' />
-                        <Button
-                            color='white'
-                            h='60px'
-                            w='10em'
-                            borderRadius='0px 60px 60px 0px'
-                            _hover='none'
-                            bg={`linear-gradient(98.37deg, #f89e00 0.99%, #da2f68 100%)`}>
-                            Search
-                        </Button>
+                    <Box>
+                        <SearchForm />
                     </Box>
                 </Center >
                 <br />
@@ -47,17 +57,17 @@ const Home = () => {
                 <br />
                 <Box>
                     <PopularContextProvider>
-                        <Popular/>
+                        <Popular />
                     </PopularContextProvider>
                 </Box>
                 <br />
                 <br />
                 <Box>
                     <TopRatedContextProvider>
-                        <TopRated/>
+                        <TopRated />
                     </TopRatedContextProvider>
                 </Box>
-                
+
             </Box >
         </>
     )

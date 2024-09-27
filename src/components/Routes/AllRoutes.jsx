@@ -7,6 +7,9 @@ import HomeRoute from './HomeRoute'
 import MovieWrapper from '../Wrappers/movieWrapper/MovieWrapper'
 import TvShowWrapper from '../Wrappers/tvshowWrapper/TvShowWrapper'
 import MoviesList from '../../Pages/Movie_Pages/MoviesList'
+import TvShowList from '../../Pages/TVShow_Pages /TVShowList'
+import { SearchContextProvider } from '../../Context/SearchContext/SearchContext'
+import SingleItem from '../../Pages/SIngle_Pages/SingleItem'
 
 
 const router = createBrowserRouter([
@@ -16,7 +19,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Home />
+        element: <SearchContextProvider> <Home /></SearchContextProvider>
       },
       {
         path: '/movies',
@@ -24,11 +27,11 @@ const router = createBrowserRouter([
         children: [
           {
             path: ':id',
-            element: <div> Single Movie Details</div>
+            element: <SingleItem/>
           },
           {
             index: true,
-            element: <MoviesList/> ,
+            element: <MoviesList />,
           }
         ]
       },
@@ -42,7 +45,7 @@ const router = createBrowserRouter([
           },
           {
             index: true,
-            element: <>tvshow</>
+            element: <TvShowList />
           }
         ]
       }
@@ -51,7 +54,7 @@ const router = createBrowserRouter([
 ]);
 
 const AllRoutes = () => {
-    return <RouterProvider router={router}></RouterProvider>
+  return <RouterProvider router={router}></RouterProvider>
 }
 
 export default AllRoutes

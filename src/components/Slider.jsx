@@ -3,7 +3,6 @@ import {
     Box,
     Image,
     Square,
-    Link,
     Text,
     VStack,
     Button,
@@ -17,6 +16,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/autoplay";
+import {Link} from 'react-router-dom'
 import { genres } from "./Trending/genres";
 import CircularProgress from "./Progress_Bars/CircularProgress";
 import CircleProgress from "./Progress_Bars/CircularProgress";
@@ -66,7 +66,7 @@ const Slider = ({ type }) => {
             >
                 {type.map((i) => (
                     <SwiperSlide key={i.id}>
-                        <Link to={''}>
+                        <Link to={'/movies/'+i.id}>
                             <Square m="auto" position='relative'>
                                 <Image
                                     src={`${baseUrl + i.poster_path}`}
@@ -95,7 +95,7 @@ const Slider = ({ type }) => {
                                 fontSize="16px"
                                 color='white'
                             >
-                                {i.original_title}
+                                {i.original_title !== undefined ?  i.original_title : i.original_name}
                             </Text>
                             <Text
                                 pb={5}
@@ -103,7 +103,7 @@ const Slider = ({ type }) => {
                                 fontSize="13px"
                                 color='white'
                             >
-                                {i.release_date}
+                                {i.release_date !== undefined ? i.release_date : i.first_air_date}
                             </Text>
                         </VStack>
                     </SwiperSlide>
